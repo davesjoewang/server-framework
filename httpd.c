@@ -20,23 +20,7 @@ static void on_data(server_pt srv, int fd)
         Server.write(srv, fd, reply, sizeof(reply));
 }
 
-void print_conn(server_pt srv, int fd, void *arg)
-{
-    printf("- Connection to FD: %d\n", fd);
-}
-
-void done_printing(server_pt srv, int fd, void *arg)
-{
-    fprintf(stderr, "# Total Clients: %lu\n", Server.count(srv, NULL));
-}
-
-void timer_task(server_pt srv)
-{
-    size_t count = Server.each(srv, 0,
-                               NULL, print_conn,
-                               NULL, done_printing);
-    fprintf(stderr, "Clients: %lu\n", count);
-}
+void timer_task(){}
 
 void on_init(server_pt srv)
 {
