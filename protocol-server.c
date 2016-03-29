@@ -708,6 +708,10 @@ static int srv_listen(struct ServerSettings settings)
     sigaction(SIGINT, &new_int, &old_int);
     sigaction(SIGTERM, &new_int, &old_term);
     sigaction(SIGPIPE, &new_pipe, &old_pipe);
+    /* daemonize - fork a new child process and
+     * terminate the forntend process whose parent process is shell
+     */
+    if(fork()>0) exit(0);
 
     /* setup concurrency */
     srv.root_pid = getpid();
